@@ -1,0 +1,94 @@
+﻿
+
+
+<div class="modal right fade" id="fisEkle" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content ajax-form">
+            <div class="modal-body">
+                <h3 class="baslik">
+                    Fiş Ekle
+                </h3>
+                <ul class="ajax-errors alert alert-danger" role="alert">
+                </ul>
+                <div class="flex">
+                    <div class="row w-97">
+                        <div class="col-md-3 pl-0">
+                            <p class="text-center font-weight-bold text-primary form-head">İşin Adı</p>
+                        </div>
+                        <div class="col-md-1 pl-0">
+                            <p class="text-center bold font-weight-bold text-primary form-head">Adet</p>
+                        </div>
+                        <div class="col-md-3 pl-0">
+                            <p class="text-center bold font-weight-bold text-primary form-head">Açıklama</p>
+                        </div>
+                        <div class="col-md-2 pl-0">
+                            <p class="text-center bold font-weight-bold text-primary form-head">Fiyat</p>
+                        </div>
+                        <div class="col-md-2 pl-0">
+                            <p class="text-center bold font-weight-bold text-primary form-head">Ölçü</p>
+                        </div>
+                        <div class="col-md-1 pl-0">
+                            <p class="text-center bold font-weight-bold text-primary form-head">K.D.V.</p>
+                        </div>
+                    </div>
+                    <div class="w-3"></div>
+                </div>
+                <div class="form-group">
+                    <div class="form-input-content">
+                        <div class="flex">
+                            <div class="row w-97 m-0">
+                                <div class="col-md-3 pl-0">
+                                    <input name="FisOzellikleri[][Tanim]" class="form-control " />
+                                </div>
+                                <div class="col-md-1 pl-0">
+                                    <input name="FisOzellikleri[][Adet]" class="form-control " />
+                                </div>
+                                <div class="col-md-3 pl-0">
+                                    <input name="FisOzellikleri[][Aciklama]" class="form-control " />
+                                </div>
+                                <div class="col-md-2 pl-0">
+                                    <input name="FisOzellikleri[][Fiyat]" class="form-control " />
+                                </div>
+                                <div class="col-md-2 pl-0">
+                                    <input name="FisOzellikleri[][Olcu]" class="form-control " />
+                                </div>
+                                <div class="col-md-1 pl-0">
+                                    <select name="FisOzellikleri[][KDV]" class="form-control kdvList">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="w-3 flex">
+                                <i class="remove-content icofont-close text-primary"></i>
+                                <i class="copy-content rotate-45 icofont-close text-primary"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <hr />
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <p class="bold font-weight-bold text-primary form-head pl-0 pb-1">Fiş Açıklaması</p>
+                            <textarea class="form-control" rows="3" name="FisNot" placeholder="Not"></textarea>
+                        </div>
+                        <div class="col-md-4 ">
+                            <p class="bold font-weight-bold text-primary form-head pl-0 pb-1">Ön Ödeme</p>
+                            <div class="flex">
+                                <input type="text" name="OnOdeme" class="form-control" placeholder="Ön Ödeme">
+                                <span class="bold font-weight-bold text-primary form-head pl-1"> TL</span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Kapat</button>
+                <button type="button" class="btn btn-primary btn-sm submit-btn">Kaydet</button>
+            </div>
+        </div>
+      
+    </div>
+</div>

@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MusteriTakip.DataAccess\MusteriTakip.DataAccess.csproj" />
+    <ProjectReference Include="..\MusteriTakip.DTOs\MusteriTakip.DTOs.csproj" />
+    <ProjectReference Include="..\MusteriTakip.Entities\MusteriTakip.Entities.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation.AspNetCore" Version="9.1.2" />
+  </ItemGroup>
+
+</Project>

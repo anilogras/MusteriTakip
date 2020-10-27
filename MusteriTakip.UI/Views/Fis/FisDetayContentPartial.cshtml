@@ -1,0 +1,133 @@
+﻿
+@model FisDto
+
+<h3 class="baslik">
+    Fis Düzenle
+   
+</h3>
+
+<input type="hidden" name="Id" value="@Model.Id" />
+
+<ul class="ajax-errors alert alert-danger" role="alert">
+
+</ul>
+<div class="flex">
+    <div class="row w-97">
+        <div class="col-md-3 pl-0">
+            <p class="text-center font-weight-bold text-primary form-head">İşin Adı</p>
+        </div>
+        <div class="col-md-1 pl-0">
+            <p class="text-center bold font-weight-bold text-primary form-head">Adet</p>
+        </div>
+        <div class="col-md-2 pl-0">
+            <p class="text-center bold font-weight-bold text-primary form-head">Açıklama</p>
+        </div>
+        <div class="col-md-2 pl-0">
+            <p class="text-center bold font-weight-bold text-primary form-head">Fiyat</p>
+        </div>
+        <div class="col-md-2 pl-0">
+            <p class="text-center bold font-weight-bold text-primary form-head">Ölçü</p>
+        </div>
+        <div class="col-md-1 pl-0">
+            <p class="text-center bold font-weight-bold text-primary form-head">K.D.V.</p>
+        </div>
+        <div class="col-md-1 pl-0">
+            <p class="text-center bold font-weight-bold text-primary form-head">Durum</p>
+        </div>
+    </div>
+    <div class="w-3"></div>
+</div>
+<div class="form-group">
+    @foreach (var fisOzellik in Model.FisOzellikleri)
+    {
+        <div class="form-input-content">
+            <div class="flex">
+                <div class="row w-97 m-0">
+                    <div class="col-md-3 pl-0">
+                        <input name="FisOzellikleri[][Tanim]" class="form-control " value="@fisOzellik.Tanim" />
+                    </div>
+                    <div class="col-md-1 pl-0">
+                        <input name="FisOzellikleri[][Adet]" class="form-control " value="@fisOzellik.Adet" />
+                    </div>
+                    <div class="col-md-2 pl-0">
+                        <input name="FisOzellikleri[][Aciklama]" class="form-control " value="@fisOzellik.Aciklama" />
+                    </div>
+                    <div class="col-md-2 pl-0">
+                        <input name="FisOzellikleri[][Fiyat]" class="form-control" value="@fisOzellik.Fiyat" />
+                    </div>
+                    <div class="col-md-2 pl-0">
+                        <input name="FisOzellikleri[][Olcu]" class="form-control " value="@fisOzellik.Olcu" />
+                    </div>
+                    <div class="col-md-1 pl-0">
+                        <select name="FisOzellikleri[][KDV]" class="form-control kdvList" data-selected-value="@fisOzellik.KDV">
+                        </select>
+                    </div>
+                    <div class="col-md-1 pl-0">
+                            <select name="FisOzellikleri[][Durum]" class="form-control">
+
+                                @if (fisOzellik.Durum == 1)
+                                {
+                                    <option value="1" selected>Tasarım</option>
+                                }
+                                else
+                                {
+                                    <option value="1">Tasarım</option>
+                                }
+
+                                @if (fisOzellik.Durum == 2)
+                                {
+                                    <option value="2" selected>Baskı</option>
+                                }
+                                else
+                                {
+                                    <option value="2">Baskı</option>
+                                }
+
+                                @if (fisOzellik.Durum == 3)
+                                {
+                                    <option value="3" selected>Uygulama</option>
+                                }
+                                else
+                                {
+                                    <option value="3">Uygulama</option>
+                                }
+
+                                @if (fisOzellik.Durum == 4)
+                                {
+                                    <option value="4" selected>Teslimat</option>
+                                }
+                                else
+                                {
+                                    <option value="4">Teslimat</option>
+                                }
+
+                              
+                            </select>
+                    </div>
+                </div>
+                <div class="w-3 flex">
+                    <i class="remove-content icofont-close text-primary"></i>
+                    <i class="copy-content rotate-45 icofont-close text-primary"></i>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<hr />
+<div class="form-group">
+    <div class="row">
+        <div class="col-md-8">
+            <p class="bold font-weight-bold text-primary form-head pl-0 pb-1">Fiş Açıklaması</p>
+            <textarea class="form-control" rows="3" name="FisNot" placeholder="Not"></textarea>
+        </div>
+        <div class="col-md-4 ">
+            <p class="bold font-weight-bold text-primary form-head pl-0 pb-1">Ön Ödeme</p>
+            <div class="flex">
+                <input type="text" name="OnOdeme" class="form-control" placeholder="Ön Ödeme">
+                <span class="bold font-weight-bold text-primary form-head pl-1"> TL</span>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,103 @@
+﻿
+
+@model PagedList<CariListDto>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Cari</th>
+            <th>Sabit Telefon</th>
+            <th>Cep Telefonu</th>
+            <th>E-Posta</th>
+            <th>
+                Adres
+            </th>
+            <th width="70px">
+
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var cari in Model.Data)
+        {
+        <tr>
+            <td>
+                <span>
+                    @cari.IsletmeAdi
+                </span>
+                <span>
+                    (  @cari.IsletmeYetkilisi )
+                </span>
+            </td>
+            <td>
+                @if (cari.CariSabitTelefonlari.Count() != 0)
+                {
+                    <span class="span">Sabit Telefon :</span>
+                    @(cari.CariSabitTelefonlari.FirstOrDefault().Telefon.TelNoDuzenle())
+                }
+            </td>
+            <td>
+                @if (cari.CariCepTelefonlari.Count() != 0)
+                {
+                    <span class="span">Cep Telefonu :</span>
+                    @(cari.CariCepTelefonlari.FirstOrDefault().Cep.TelNoDuzenle())
+                }
+
+
+            <td>
+                @if (cari.CariEMailAdresleri.Count() != 0)
+                {
+                    <span class="span">
+                        E-Posta Adresleri :
+                    </span>
+
+                    @(cari.CariEMailAdresleri.FirstOrDefault().EMail)
+                }
+            </td>
+            <td>
+
+                @if (cari.CariAdresBilgileri.Count() != 0)
+                {
+                    @cari.CariAdresBilgileri.FirstOrDefault().Adres<br />
+                    @(cari.CariAdresBilgileri.FirstOrDefault().Il.Sehir) <span>/</span> @cari.CariAdresBilgileri.FirstOrDefault().Ilce.IlceAdi
+                }
+
+            </td>
+            <td>
+                <a href="/Cari/CariDetay/@cari.Id" >
+                    <i class="icofont-eye"></i>
+                </a>
+                <span class="text-primary btn-span cursor-hand" data-toggle="modal" data-target="#cariSil" data-post-url="/Cari/CariSil/@cari.Id" data-cari-adi="@(cari.IsletmeAdi + "( "+cari.IsletmeYetkilisi+" )")">
+                    <i class="icofont-ui-delete"></i>
+                </span>
+            </td>
+        </tr>
+        }
+    </tbody>
+
+</table>
+
+
+<pagination pagination-model="Model" link-url="/Cari/Cariler/"></pagination>
+
+<div class="modal fade modal-delete" id="cariSil" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title baslik mb-0">
+                    Cari Sil
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <span id="cariAdi" class="bold"></span> Cariyi Silmek İstediğinize Emin Misiniz ?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">İptal</button>
+                <button id="delete" class="btn btn-danger btn-sm text-white">Sil</button>
+            </div>
+        </div>
+    </div>
+</div>

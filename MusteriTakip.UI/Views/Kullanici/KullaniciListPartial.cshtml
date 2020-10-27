@@ -1,0 +1,98 @@
+﻿
+@model PagedList<KullaniciListDto>
+
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                Kullanıcı Adı
+            </th>
+            <th>
+                E-Mail
+            </th>
+            <th>
+                Yetkiler
+            </th>
+            <th>
+                Durum
+            </th>
+            <th width="70px">
+
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var kullanici in Model.Data)
+        {
+            <tr>
+                <td>
+                    @if (!string.IsNullOrEmpty(kullanici.AdSoyad))
+                    {
+                        @(kullanici.AdSoyad)
+                    }
+                </td>
+                <td>
+                    @if (!string.IsNullOrEmpty(kullanici.Email))
+                    {
+                        @(kullanici.Email)
+                    }
+                </td>
+                <td>
+                    @{
+                        foreach (var rol in kullanici.UserRoles)
+                        {
+                            @(rol.Rol.RolAdi) <span class="last">,</span>
+                        }
+                    }
+                </td>
+                <td>
+                    @if (kullanici.Aktif)
+                    {
+                        <label class="circle aktif" title="Aktif">
+
+                        </label>}
+                    else
+                    {
+                        <label class="circle pasif" title="Pasif">
+
+                        </label>
+                    }
+                </td>
+                <td>
+                    <a href="/Kullanici/Detay/@kullanici.Id">
+                        <i class="icofont-eye"></i>
+                    </a>
+                    <span class="text-primary btn-span cursor-hand"  data-toggle="modal" data-target="#kullaniciSil" data-post-url="/kullanici/KullaniciSil/@kullanici.Id" data-kullanici-adi="@(kullanici.AdSoyad)">
+                        <i class="icofont-ui-delete"></i>
+                    </span>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+<pagination pagination-model="Model" link-url="/Kullanici/Kullanicilar/"></pagination>
+
+<div class="modal fade modal-delete" id="kullaniciSil" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title baslik mb-0">
+                    Kullanici Sil
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <span id="kullaniciAdi" class="bold"></span> İsimli Kullanıcıyı Silmek İstediğinize Emin Misiniz ?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">İptal</button>
+                <button id="delete" class="btn btn-danger btn-sm text-white">Sil</button>
+            </div>
+        </div>
+    </div>
+</div>

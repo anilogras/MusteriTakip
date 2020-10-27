@@ -1,0 +1,70 @@
+﻿
+@model PagedList<FisDto>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Fiş Numarası</th>
+            <th>Kayıt Tarihi</th>
+            <th>İşin Durumu</th>
+            <th>Fişi Üstlenen</th>
+            <th width="70px"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var fis in Model.Data)
+        {
+            <tr>
+                <td>
+                    @fis.Id.ToString().PadLeft(7, '0')
+                </td>
+                <td>
+                    @fis.KayitTarihi.ToShortDateString()
+                </td>
+                <td>
+                    İş Durumu
+                </td>
+                <td>
+                    @fis.Kullanici.AdSoyad
+                </td>
+                <td>
+                    <span class="text-primary cursor-hand" data-toggle="modal" data-target="#fisDetay" data-post-url="/Fis/FisDuzenle/@fis.Id?cariId=@fis.Cari.Id" data-fis-id="@fis.Id">
+                        <i class="icofont-eye"></i>
+                    </span>
+                    <span class="text-primary cursor-hand" data-toggle="modal" data-target="#fisSil" data-post-url="/Fis/FisSil/@fis.Id?cariId=@fis.Cari.Id" data-fis-no="@fis.Id.ToString().PadLeft(7,'0')">
+                        <i class="icofont-ui-delete"></i>
+                    </span>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@if (Model.Data.Count() != 0)
+{
+
+    <pagination pagination-model="Model" link-url="/Cari/CariDetay/?cariId=@Model.Data.FirstOrDefault().Cari.Id"></pagination>
+}
+
+<div class="modal fade modal-delete" id="fisSil" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title baslik mb-0">
+                    Fiş Sil
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <span id="fisNo" class="bold"></span> Numaralı Fişi Silmek İstediğinize Emin Misiniz ?
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">İptal</button>
+                <button id="delete" class="btn btn-danger btn-sm text-white">Sil</button>
+            </div>
+        </div>
+    </div>
+</div>

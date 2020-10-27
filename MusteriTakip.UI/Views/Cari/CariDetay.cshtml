@@ -1,0 +1,242 @@
+﻿
+@{
+    ViewData["Title"] = "CariDetay";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+@model CariDetayView
+
+<div class="row">
+    <div class="col-md-10">
+        <div class="card shadow mb-4">
+            <a href="#collapseCardExample" class="d-block card-header py-3 collapsed" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseCardExample">
+                <h6 class="m-0 font-weight-bold text-primary">
+                    @{
+                        if (!string.IsNullOrEmpty(Model.CariBilgileri.IsletmeAdi))
+                            @(Model.CariBilgileri.IsletmeAdi.ToUpper())
+                    }
+                    ( @{
+                        if (!string.IsNullOrEmpty(Model.CariBilgileri.IsletmeYetkilisi))
+                            @(Model.CariBilgileri.IsletmeYetkilisi.ToUpper())
+                    } )
+                </h6>
+            </a>
+            <div class="collapse" id="collapseCardExample">
+                <div class="card-body">
+                    <div class="row cari-bilgileri">
+                        <div class="col-md-8 col-sm-12">
+                            @if (Model.CariBilgileri.CariSabitTelefonlari.Count() != 0)
+                            {
+                                <div class="flex-start div-list">
+                                    <div>
+                                        <b>Sabit Telefon Bilgileri :</b>
+                                    </div>
+                                    <div>
+                                        @foreach (var sabitTelefonlar in Model.CariBilgileri.CariSabitTelefonlari)
+                                        {
+
+                                            @(sabitTelefonlar.Telefon.TelNoDuzenle() ) <span>-</span>
+
+                                        }
+                                    </div>
+                                </div>
+                            }
+
+                            @if (Model.CariBilgileri.CariCepTelefonlari.Count() != 0)
+                            {
+                                <div class="flex-start div-list">
+                                    <div>
+                                        <b>Cep Telefon Bilgileri :</b>
+                                    </div>
+                                    <div>
+                                        @foreach (var cepTelefon in Model.CariBilgileri.CariCepTelefonlari)
+                                        {
+                                            @(cepTelefon.Cep.TelNoDuzenle()) <span>-</span>
+                                        }
+                                    </div>
+                                </div>
+                            }
+
+                            @if (Model.CariBilgileri.CariFaxTelefonlari.Count() != 0)
+                            {
+                                <div class="flex-start div-list">
+                                    <div>
+                                        <b>Fax Bilgileri :</b>
+                                    </div>
+                                    <div>
+                                        @foreach (var faxBilgileri in Model.CariBilgileri.CariFaxTelefonlari)
+                                        {
+
+                                            @(faxBilgileri.Fax.TelNoDuzenle()) <span>-</span>
+
+                                        }
+                                    </div>
+                                </div>
+                            }
+
+                            @if (Model.CariBilgileri.CariEMailAdresleri.Count() != 0)
+                            {
+                                <div class="flex-start div-list">
+                                    <div>
+                                        <b>E-Mail Bilgileri :</b>
+                                    </div>
+                                    <div>
+                                        @foreach (var eMail in Model.CariBilgileri.CariEMailAdresleri)
+                                        {
+                                            @(eMail.EMail) <span>-</span>
+                                        }
+                                    </div>
+                                </div>
+                            }
+
+                            @if (Model.CariBilgileri.CariWebSiteBilgileri.Count() != 0)
+                            {
+                                <div class="flex-start div-list">
+                                    <div>
+                                        <b>Web Site Bilgileri :</b>
+                                    </div>
+                                    <div>
+                                        @foreach (var webSite in Model.CariBilgileri.CariWebSiteBilgileri)
+                                        {
+
+                                            <a href="@(webSite.WebSite)" target="_blank">@(webSite.WebSite)</a> <span>-</span>
+                                        }
+                                    </div>
+                                </div>
+                            }
+                        </div>
+
+                        <div class="col-md-4 col-sm-6">
+                            @if (Model.CariBilgileri.CariAdresBilgileri.Count() != 0)
+                            {
+                                <div class="flex-start div-list">
+                                    <div>
+                                        <b>Adres Bilgileri :</b>
+                                    </div>
+                                    <div>
+                                        @foreach (var adresBilgileri in Model.CariBilgileri.CariAdresBilgileri)
+                                        {
+                                            <div class="list-item">
+                                                @(adresBilgileri.Adres) @(adresBilgileri.Il.Sehir) <span>/</span> @(adresBilgileri.Ilce.IlceAdi) <span>-</span>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            }
+                        </div>
+
+                        <div class="col-md-4 col-sm-6">
+                            @if (Model.CariBilgileri.CariVDBilgileri != null)
+                            {
+                                <div class="flex-start div-list">
+                                    <div>
+                                        <b>V.D. Bilgileri :</b>
+                                    </div>
+                                    <div>
+                                        <div class="list-item">
+                                            Ünvan : @Model.CariBilgileri.CariVDBilgileri.Unvan
+                                        </div>
+                                        <div class="list-item">
+                                            Vd. Dairesi : @Model.CariBilgileri.CariVDBilgileri.VdDairesi
+                                        </div>
+                                        <div class="list-item">
+                                            Vd. No : @Model.CariBilgileri.CariVDBilgileri.VDNo
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card shadow mb-4">
+            <div class="card-body">
+                <div class="ajax-table">
+                    <partial name="~/Views/Fis/FisListPartial.cshtml" model="Model.CariFisleri" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <button class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm mb-3 w-100 justify-content-end text-left" data-toggle="modal" data-target="#fisEkle" data-post-url="/Fis/CariFisEkle/?cariId=@Model.CariBilgileri.Id">
+            <i class="icofont-paper"></i>Fis Ekle
+        </button>
+        <partial name="~/Views/Fis/FisSayisiPartial.cshtml" />
+    </div>
+</div>
+
+<partial name="~/Views/Fis/FisEklePartial.cshtml" />
+<partial name="~/Views/Fis/FisDetayPartial.cshtml" />
+
+
+@section scripts{
+
+    <script>
+
+
+        function kdvGetir() {
+        $.ajax({
+            url: "/Kdv/Kdvler",
+            dataType: "json",
+            type: "post",
+            success: function (data) {
+                var parseData = JSON.parse(data);
+                var kdvSelectBoxlari = $(document).find(".kdvList");
+
+                $.each(kdvSelectBoxlari, function (i, kdvSelect) {
+
+                    $(kdvSelect).empty();
+
+                    if ($(kdvSelect).data("selected-value") != null) {
+
+                        var selectedIndex = $(kdvSelect).data("selected-value");
+                        $.each(parseData, function (i, value) {
+                            if (value.KDVOrani == selectedIndex) {
+                                $(kdvSelect).append(`<option value="${value.KDVOrani}" selected >${value.KDVOrani} %</option>`)
+                            } else {
+                                $(kdvSelect).append(`<option value="${value.KDVOrani}" >${value.KDVOrani} %</option>`)
+                            }
+                        })
+
+
+                    } else {
+                        $.each(parseData, function (i, value) {
+                            $(kdvSelect).append(`<option value="${value.KDVOrani}" >${value.KDVOrani} %</option>`)
+                        })
+                    }
+
+                })
+            }
+        })
+    }
+
+        function fisSayisiGetir() {
+            $.ajax({
+            url: "/Cari/FisSayisiGetir/@Model.CariBilgileri.Id",
+            dataType: "json",
+            type: "Get",
+            success: function (data) {
+                var parseData = JSON.parse(data);
+                $(".toplam-fis").text(parseData.ToplamFis);
+                $(".faturasiz-fisler").text(parseData.FaturasizFisler);
+                $(".acik-fisler").text(parseData.AcikFisler);
+            }
+        })
+        }
+
+        fisSayisiGetir();
+        kdvGetir();
+
+        $(document).on("update", function () {
+            fisSayisiGetir();
+        })
+
+
+
+
+
+
+    </script>
+
+}

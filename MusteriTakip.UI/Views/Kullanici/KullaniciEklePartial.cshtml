@@ -1,0 +1,72 @@
+﻿
+
+<div class="modal right fade modal-form" id="kullaniciEkle" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content ajax-form">
+            <div class="modal-body">
+                <h3 class="baslik">
+                    Kullanıcı Ekle
+                </h3>
+                <ul class="ajax-errors alert alert-danger">
+                </ul>
+                <div class="form-group">
+                    <div class="row">
+                        <label class="col-sm-12 col-form-label">
+                            Kullanıcı Adı
+                        </label>
+                        <div class="col-sm-12">
+                            <input name="AdSoyad" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-sm-12 col-form-label">
+                            E-Mail
+                        </label>
+                        <div class="col-sm-12">
+                            <input name="Email" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-sm-12 col-form-label">
+                            Şifre
+                        </label>
+                        <div class="col-sm-12">
+                            <input name="Sifre" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-sm-12 col-form-label">
+                            Şifre Tekrar
+                        </label>
+                        <div class="col-sm-12">
+                            <input name="SifreTekrar" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-sm-12 col-form-label">
+                            Cinsiyet
+                        </label>
+                        <div class="col-sm-12">
+                            Erkek  <input type="radio" checked name="cinsiyet" value="E" id="erkek" /><br />
+                            Kadın  <input type="radio" name="cinsiyet" value="K" id="kadin" />
+
+                        </div>
+                    </div>
+                </div>
+                <hr />
+                <h5 class="alt-baslik">
+                    Kullanıcı Yetkileri
+                </h5>
+                <div class="form-group row yetkiler">
+                    <label class="col-sm-12 col-form-label">
+                        Yetkiler
+                    </label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Kapat</button>
+                <button type="button" class="btn btn-primary btn-sm submit-btn">Kaydet</button>
+            </div>
+        </div>
+    </div>
+</div>

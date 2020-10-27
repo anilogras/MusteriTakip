@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewData["Title"] = "Kullanicilar";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+@model KullaniciViewModel
+
+
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Kayıtlı Kullanıcılar</h1>
+    <button class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle="modal" data-target="#kullaniciEkle" data-post-url="/Kullanici/KullaniciEkle/"><i class="icofont-people"></i>Kullanıcı Ekle</button>
+</div>
+<div class="card shadow mb-4">
+
+    <div class="card-body">
+        <div class="ajax-table">
+            <partial name="KullaniciListPartial" model="Model.Kullanicilar" />
+        </div>
+    </div>
+</div>
+<partial name="KullaniciEklePartial" />
