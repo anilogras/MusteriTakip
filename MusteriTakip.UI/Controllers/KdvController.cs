@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MusteriTakip.Business.Services;
 using Newtonsoft.Json;
 
 namespace MusteriTakip.UI.Controllers
 {
+    [Authorize]
+    [AutoValidateAntiforgeryToken]
     public class KdvController : Controller
     {
         private readonly IKDVService _kdvService;

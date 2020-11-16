@@ -1,5 +1,4 @@
 ﻿
-
 <div class="modal right fade modal-form" id="kullaniciEkle" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content ajax-form">
@@ -9,10 +8,11 @@
                 </h3>
                 <ul class="ajax-errors alert alert-danger">
                 </ul>
+                @Html.AntiForgeryToken()
                 <div class="form-group">
                     <div class="row">
                         <label class="col-sm-12 col-form-label">
-                            Kullanıcı Adı
+                            Kullanıcı Ad Soyad
                         </label>
                         <div class="col-sm-12">
                             <input name="AdSoyad" class="form-control" />

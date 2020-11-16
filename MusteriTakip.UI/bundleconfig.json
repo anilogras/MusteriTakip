@@ -6,7 +6,8 @@
       "wwwroot/sbAdmin2/icofont/icofont.css",
       "wwwroot/sbAdmin2/css/sb-admin-2.css",
       "wwwroot/sbAdmin2/css/custom.css",
-      "wwwroot/alertifyjs/css/alertify.css"
+      "wwwroot/alertifyjs/css/alertify.css",
+      "wwwroot/sbAdmin2/vendor/fontawesome-free/css/all.css"
 
     ],
 

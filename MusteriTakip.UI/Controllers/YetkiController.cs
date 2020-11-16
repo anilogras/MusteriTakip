@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MusteriTakip.Business.Services;
 using MusteriTakip.DTOs.KullaniciDtos;
@@ -10,6 +11,8 @@ using System.Threading.Tasks;
 
 namespace MusteriTakip.UI.Controllers
 {
+    [Authorize]
+    [AutoValidateAntiforgeryToken]
     public class YetkiController : Controller
     {
         private readonly IRoleServices _appRoleService;

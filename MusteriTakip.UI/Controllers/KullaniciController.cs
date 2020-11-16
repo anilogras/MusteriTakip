@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MusteriTakip.Business.Services;
 using MusteriTakip.DTOs.KullaniciDtos;
@@ -13,6 +14,8 @@ using Newtonsoft.Json;
 
 namespace MusteriTakip.UI.Controllers
 {
+    [Authorize]
+    [AutoValidateAntiforgeryToken]
     public class KullaniciController : Controller
     {
         private readonly IUserServices _userService;
@@ -71,5 +74,24 @@ namespace MusteriTakip.UI.Controllers
             }
             return RedirectToAction("Index", "Home");
         }
+
+        [AllowAnonymous]
+        public IActionResult Giris()
+        {
+            return View();
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
+        public async Task<IActionResult> Giris(KullaniciLoginDto model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            await  _userService.UserLogin(model.UserName, model.Password, model.RememberMe);
+            return RedirectToAction("Index", "Home");
+        }
+
     }
 }

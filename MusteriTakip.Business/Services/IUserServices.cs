@@ -13,7 +13,7 @@ namespace MusteriTakip.Business.Services
     {
 
         Task<IdentityResult> UserAdd(User user, string password);
-        Task<IdentityResult> UserAdd(User user,List<Role> roles, string password);
+        Task<IdentityResult> UserAdd(User user, List<Role> roles, string password);
         Task<bool> UserDelete(User user);
         Task<bool> UserAddRole(User user, string role);
         Task<bool> UserAddRole(User user, List<string> role);
@@ -23,9 +23,11 @@ namespace MusteriTakip.Business.Services
         Task<User> UserGetById(Claim nameIdentifier);
         List<User> UserGetAll();
         IQueryable<User> GetUserWithRoles();
+        User GetUserWithEMail(string eMail);
+
         Task<User> GetUserByIdAsync(int id);
         IQueryable<Fis> GetUserFis(int id);
-
         Task UserChangeStatus(int id);
+        Task<SignInResult> UserLogin(string userName, string password, bool persistent);
     }
 }

@@ -16,15 +16,20 @@ namespace MusteriTakip.Business.Concrete
     {
 
         private readonly UserManager<User> _userManager;
+        private readonly SignInManager<User> _signInManager;
         private readonly IUserDal _userDal;
 
-        public UserManager(UserManager<User> userManager, IUserDal userDal)
+        public UserManager(UserManager<User> userManager, IUserDal userDal, SignInManager<User> signInManager)
         {
             _userManager = userManager;
             _userDal = userDal;
+            _signInManager = signInManager;
         }
+
+
         public async Task<IdentityResult> UserAdd(User user, string password)
         {
+            user.UserName = user.Email;
             var result = await _userManager.CreateAsync(user, password);
             if (result.Succeeded)
             {
@@ -37,6 +42,7 @@ namespace MusteriTakip.Business.Concrete
         }
         public async Task<IdentityResult> UserAdd(User user,List<Role> roles, string password)
         {
+            user.UserName = user.Email;
             var result = await _userManager.CreateAsync(user, password);
             if (result.Succeeded)
             {
@@ -108,6 +114,14 @@ namespace MusteriTakip.Business.Concrete
         public async Task UserChangeStatus(int id)
         {
            await _userDal.UserChangeStatus(id);
-        } 
+        }
+        public User GetUserWithEMail(string eMail)
+        {
+            return _userManager.Users.FirstOrDefault(x => x.Email == eMail);
+        }
+        public async Task<SignInResult> UserLogin(string userName , string password , bool persistent)
+        {
+           return await _signInManager.PasswordSignInAsync(userName , password, persistent , false);
+        }
     }
 }

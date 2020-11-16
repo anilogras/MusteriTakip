@@ -132,20 +132,24 @@ $(document).ready(function () {
         var serializeData = $(formContent).find(':input').filter(function () {
             return $.trim(this.value).length > 0
         }).serializeJSON();
-
-        formContent.find(":input:not(radio)").val('');
-        formContent.find("select option[value='0']").attr("selected", "selected");
+        var token = $('input[name="__RequestVerificationToken"]').val();
+       
 
         $.ajax({
             type:"Post",
             url: postUrl,
             data: { ajaxData: serializeData },
+            headers: {
+                "RequestVerificationToken": token
+            },
             success: function (data) {
 
                 $(".ajax-table").empty();
                 $(".ajax-table").html(data);
                 $(document).trigger("update");
                 $(submitButton).parents(".modal").modal("hide");
+                formContent.find(":input:not(radio)").val('');
+                formContent.find("select option[value='0']").attr("selected", "selected");
                 alertify.success("İşlem Başarılı");
             },
             error: function (errorData) {

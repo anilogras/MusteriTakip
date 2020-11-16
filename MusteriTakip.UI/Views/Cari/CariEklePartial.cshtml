@@ -1,187 +1,187 @@
 ﻿
 
 <div class="modal right fade" id="cariEkle" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog modal-xl" role="document">
-    <div class="modal-content ajax-form">
-      <div class="modal-body">
-              <h3 class="baslik">
-                  Cari Ekle
-              </h3>
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content ajax-form">
+            <div class="modal-body">
+                <h3 class="baslik">
+                    Cari Ekle
+                </h3>
+                @Html.AntiForgeryToken()
+                <ul class="ajax-errors alert alert-danger">
+                </ul>
+                <div class="form-group">
+                    <div class="row">
+                        <label class="col-sm-12 col-form-label">
+                            İşletme Yetkilisi
+                        </label>
+                        <div class="col-sm-12">
+                            <input name="IsletmeYetkilisi" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-sm-12 col-form-label">
+                            İşletme Adı
+                        </label>
+                        <div class="col-sm-12">
+                            <input name="IsletmeAdi" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-sm-12 col-form-label">
+                            İşletme Açıklaması
+                        </label>
+                        <div class="col-sm-12">
+                            <textarea name="Aciklama" class="form-control"></textarea>
+                        </div>
+                    </div>
+                </div>
 
-              <ul class="ajax-errors alert alert-danger">
-              </ul>
-              <div class="form-group">
-                  <div class="row">
-                      <label class="col-sm-12 col-form-label">
-                          İşletme Yetkilisi
-                      </label>
-                      <div class="col-sm-12">
-                          <input name="IsletmeYetkilisi" class="form-control" />
-                      </div>
-                  </div>
-                  <div class="row">
-                      <label class="col-sm-12 col-form-label">
-                          İşletme Adı
-                      </label>
-                      <div class="col-sm-12">
-                          <input name="IsletmeAdi" class="form-control" />
-                      </div>
-                  </div>
-                  <div class="row">
-                      <label class="col-sm-12 col-form-label">
-                          İşletme Açıklaması
-                      </label>
-                      <div class="col-sm-12">
-                          <textarea name="Aciklama" class="form-control"></textarea>
-                      </div>
-                  </div>
-              </div>
+                <hr />
+                <h5 class="alt-baslik">
+                    İletişim Bilgileri
+                </h5>
+                <div class="form-group row">
+                    <label class="col-sm-12 col-form-label">
+                        Sabit Telefon
+                    </label>
+                    <div class="col-sm-12  flex form-input-content">
+                        <input name="CariSabitTelefonlari[][Telefon]" class="form-control" />
+                        <i class="remove-content icofont-close-line"></i>
+                    </div>
+                    <div class="col-sm-12">
+                        <label class="form-input-copy">Ekle</label>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-12 col-form-label">
+                        Cep Telefonu
+                    </label>
+                    <div class="col-sm-12 flex form-input-content">
+                        <input name="CariCepTelefonlari[][Cep]" class="form-control" />
+                        <i class="remove-content icofont-close-line"></i>
+                    </div>
+                    <div class="col-sm-12">
+                        <label class="form-input-copy">Ekle</label>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-12 col-form-label">
+                        Fax Numarası
+                    </label>
+                    <div class="col-sm-12 flex form-input-content">
+                        <input name="CariFaxlar[][Fax]" class="form-control" />
+                        <i class="remove-content icofont-close-line"></i>
+                    </div>
+                    <div class="col-sm-12">
+                        <label class="form-input-copy">Ekle</label>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-12 col-form-label">
+                        E-Posta Adresi
+                    </label>
+                    <div class="col-sm-12 flex form-input-content">
+                        <input name="CariEmailleri[][EMail]" class="form-control" />
+                        <i class="remove-content icofont-close-line"></i>
+                    </div>
+                    <div class="col-sm-12">
+                        <label class="form-input-copy">Ekle</label>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-12 col-form-label">
+                        Web Site Adresi
+                    </label>
+                    <div class="col-sm-12 flex form-input-content">
+                        <input name="CariWebSiteleri[][WebSite]" class="form-control" />
+                        <i class="remove-content icofont-close-line"></i>
+                    </div>
+                    <div class="col-sm-12">
+                        <label class="form-input-copy">Ekle</label>
+                    </div>
+                </div>
+                <hr />
+                <h5 class="alt-baslik">
+                    Adres Bilgileri
+                </h5>
+                <div class="form-group">
 
-              <hr />
-              <h5 class="alt-baslik">
-                  İletişim Bilgileri
-              </h5>
-              <div class="form-group row">
-                  <label class="col-sm-12 col-form-label">
-                      Sabit Telefon
-                  </label>
-                  <div class="col-sm-12  flex form-input-content">
-                      <input name="CariSabitTelefonlari[][Telefon]" class="form-control" />
-                      <i class="remove-content icofont-close-line"></i>
-                  </div>
-                  <div class="col-sm-12">
-                      <label class="form-input-copy">Ekle</label>
-                  </div>
-              </div>
-              <div class="form-group row">
-                  <label class="col-sm-12 col-form-label">
-                      Cep Telefonu
-                  </label>
-                  <div class="col-sm-12 flex form-input-content">
-                      <input name="CariCepTelefonlari[][Cep]" class="form-control" />
-                      <i class="remove-content icofont-close-line"></i>
-                  </div>
-                  <div class="col-sm-12">
-                      <label class="form-input-copy">Ekle</label>
-                  </div>
-              </div>
-              <div class="form-group row">
-                  <label class="col-sm-12 col-form-label">
-                      Fax Numarası
-                  </label>
-                  <div class="col-sm-12 flex form-input-content">
-                      <input name="CariFaxlar[][Fax]" class="form-control" />
-                      <i class="remove-content icofont-close-line"></i>
-                  </div>
-                  <div class="col-sm-12">
-                      <label class="form-input-copy">Ekle</label>
-                  </div>
-              </div>
-              <div class="form-group row">
-                  <label class="col-sm-12 col-form-label">
-                      E-Posta Adresi
-                  </label>
-                  <div class="col-sm-12 flex form-input-content">
-                      <input name="CariEmailleri[][EMail]" class="form-control" />
-                      <i class="remove-content icofont-close-line"></i>
-                  </div>
-                  <div class="col-sm-12">
-                      <label class="form-input-copy">Ekle</label>
-                  </div>
-              </div>
-              <div class="form-group row">
-                  <label class="col-sm-12 col-form-label">
-                      Web Site Adresi
-                  </label>
-                  <div class="col-sm-12 flex form-input-content">
-                      <input name="CariWebSiteleri[][WebSite]" class="form-control" />
-                      <i class="remove-content icofont-close-line"></i>
-                  </div>
-                  <div class="col-sm-12">
-                      <label class="form-input-copy">Ekle</label>
-                  </div>
-              </div>
-              <hr />
-              <h5 class="alt-baslik">
-                  Adres Bilgileri
-              </h5>
-              <div class="form-group">
-
-                  <div class="form-input-content border pb-3 mb-3">
-                      <div class="col-md-12">
-                          <div class="row m-0">
-                              <label class="col-sm-12 col-form-label">
-                                  Adres <i class="remove-content icofont-close-line"></i>
-                              </label>
-                              <div class="col-sm-12">
-                                  <input name="CariAdresleri[][Adres]" class="form-control index" />
-                              </div>
-                              <div class="col-md-6">
-                                  <div class="row">
-                                      <label class="col-sm-12 col-form-label">
-                                          İl
-                                      </label>
-                                      <div class="col-sm-12">
-                                          <select class="form-control il">
-                                              <option value="">İL SEÇİN</option>
-                                          </select>
-                                      </div>
-                                  </div>
-                              </div>
-                              <div class="col-md-6">
-                                  <div class="row">
-                                      <label class="col-sm-12 col-form-label">
-                                          İlçe
-                                      </label>
-                                      <div class="col-sm-12">
-                                          <select name="CariAdresleri[][IlceId]" class="form-control ilce">
-                                              <option value="0">İLÇE SEÇİN</option>
-                                          </select>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="col-sm-12">
-                      <label class="form-input-copy">Ekle</label>
-                  </div>
-              </div>
-          <hr />
-              <h5 class="alt-baslik">
-                  Vergi Dairesi Bilgileri
-              </h5>
-              <div class="form-group">
-                  <div class="row">
-                      <label class="col-sm-12 col-form-label">
-                          Ünvan
-                      </label>
-                      <div class="col-sm-12">
-                          <input name="CariVergiDairesi[Unvan]" class="form-control" />
-                      </div>
-                  </div>
-                  <div class="row">
-                      <label class="col-sm-12 col-form-label">
-                          Vergi Dairesi No
-                      </label>
-                      <div class="col-sm-12">
-                          <input name="CariVergiDairesi[VDNo]" class="form-control" />
-                      </div>
-                  </div>
-                  <div class="row">
-                      <label class="col-sm-12 col-form-label">
-                          Vergi Dairesi Adı
-                      </label>
-                      <div class="col-sm-12">
-                          <input name="CariVergiDairesi[VdDairesi]" class="form-control" />
-                      </div>
-                  </div>
-              </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Kapat</button>
-        <button type="button" class="btn btn-primary btn-sm submit-btn">Kaydet</button>
-      </div>
+                    <div class="form-input-content border pb-3 mb-3">
+                        <div class="col-md-12">
+                            <div class="row m-0">
+                                <label class="col-sm-12 col-form-label">
+                                    Adres <i class="remove-content icofont-close-line"></i>
+                                </label>
+                                <div class="col-sm-12">
+                                    <input name="CariAdresleri[][Adres]" class="form-control index" />
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <label class="col-sm-12 col-form-label">
+                                            İl
+                                        </label>
+                                        <div class="col-sm-12">
+                                            <select class="form-control il">
+                                                <option value="">İL SEÇİN</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <label class="col-sm-12 col-form-label">
+                                            İlçe
+                                        </label>
+                                        <div class="col-sm-12">
+                                            <select name="CariAdresleri[][IlceId]" class="form-control ilce">
+                                                <option value="0">İLÇE SEÇİN</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <label class="form-input-copy">Ekle</label>
+                    </div>
+                </div>
+                <hr />
+                <h5 class="alt-baslik">
+                    Vergi Dairesi Bilgileri
+                </h5>
+                <div class="form-group">
+                    <div class="row">
+                        <label class="col-sm-12 col-form-label">
+                            Ünvan
+                        </label>
+                        <div class="col-sm-12">
+                            <input name="CariVergiDairesi[Unvan]" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-sm-12 col-form-label">
+                            Vergi Dairesi No
+                        </label>
+                        <div class="col-sm-12">
+                            <input name="CariVergiDairesi[VDNo]" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-sm-12 col-form-label">
+                            Vergi Dairesi Adı
+                        </label>
+                        <div class="col-sm-12">
+                            <input name="CariVergiDairesi[VdDairesi]" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Kapat</button>
+                <button type="button" class="btn btn-primary btn-sm submit-btn">Kaydet</button>
+            </div>
+        </div>
     </div>
-  </div>
 </div>

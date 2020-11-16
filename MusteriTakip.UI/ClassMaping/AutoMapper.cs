@@ -29,13 +29,9 @@ namespace MusteriTakip.UI.ClassMaping
             CreateMap<Role, RoleListDto>();
 
             CreateMap<KullaniciListDto, User>()
-                .ForMember(dest => dest.UserRoles, opt => opt.MapFrom(src => src.UserRoles))
-                .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.AdSoyad))
                 .ForMember(dest => dest.UserRoles, opt => opt.MapFrom(src => src.UserRoles));
 
             CreateMap<User, KullaniciListDto>()
-                 .ForMember(dest => dest.UserRoles, opt => opt.MapFrom(src => src.UserRoles))
-                 .ForMember(dest => dest.AdSoyad, opt => opt.MapFrom(src => src.UserName))
                  .ForMember(dest => dest.UserRoles, opt => opt.MapFrom(src => src.UserRoles));
 
 
