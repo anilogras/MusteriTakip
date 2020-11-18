@@ -89,7 +89,9 @@ namespace MusteriTakip.UI.Controllers
             {
                 return View(model);
             }
+
             await  _userService.UserLogin(model.UserName, model.Password, model.RememberMe);
+            
             return RedirectToAction("Index", "Home");
         }
 

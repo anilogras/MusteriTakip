@@ -34,7 +34,7 @@ namespace MusteriTakip.Business.Concrete
             if (result.Succeeded)
             {
                 await _userManager.AddClaimAsync(user, new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()));
-                await _userManager.AddClaimAsync(user, new Claim(ClaimTypes.Name, user.AdSoyad));
+                await _userManager.AddClaimAsync(user, new Claim("adsoyad", user.AdSoyad));
                 await _userManager.AddClaimAsync(user, new Claim(ClaimTypes.Email, user.Email));
                 await _userManager.AddToRoleAsync(user, "Member");
             }
@@ -47,7 +47,7 @@ namespace MusteriTakip.Business.Concrete
             if (result.Succeeded)
             {
                 await _userManager.AddClaimAsync(user, new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()));
-                await _userManager.AddClaimAsync(user, new Claim(ClaimTypes.Name, user.AdSoyad));
+                await _userManager.AddClaimAsync(user, new Claim("adsoyad", user.AdSoyad));
                 await _userManager.AddClaimAsync(user, new Claim(ClaimTypes.Email, user.Email));
                 if(roles.Count != 0)
                 {
