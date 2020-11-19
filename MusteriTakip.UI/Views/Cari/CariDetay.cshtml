@@ -153,7 +153,7 @@
         <div class="card shadow mb-4">
             <div class="card-body">
                 <div class="ajax-table">
-                    <partial name="~/Views/Fis/FisListPartial.cshtml" model="Model.CariFisleri" />
+                    <partial name="~/Views/Fis/FisListPartial.cshtml" model="Model.CariFisleri" view-data='@new ViewDataDictionary(ViewData) { {"url","/Cari/CariDetay/"+Model.CariBilgileri.Id} }' />
                 </div>
             </div>
         </div>

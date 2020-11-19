@@ -6,6 +6,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MusteriTakip.Business.Services;
+using MusteriTakip.DTOs.FisDtos;
 using MusteriTakip.DTOs.KullaniciDtos;
 using MusteriTakip.Entities.Concrete;
 using MusteriTakip.UI.Extensions;
@@ -20,11 +21,14 @@ namespace MusteriTakip.UI.Controllers
     {
         private readonly IUserServices _userService;
         private readonly IMapper _mapper;
+        private readonly IFisService _fisService;
 
-        public KullaniciController(IUserServices userService, IMapper mapper)
+
+        public KullaniciController(IUserServices userService, IMapper mapper, IFisService fisService)
         {
             _userService = userService;
             _mapper = mapper;
+            _fisService = fisService;
         }
 
         public IActionResult Kullanicilar(int? page)
@@ -93,6 +97,33 @@ namespace MusteriTakip.UI.Controllers
             await  _userService.UserLogin(model.UserName, model.Password, model.RememberMe);
             
             return RedirectToAction("Index", "Home");
+        }
+
+        public IActionResult FisSayisiGetir(int id)
+        {
+            FisSayilari fisSayilari = new FisSayilari
+            {
+                FaturasizFisler = _fisService.KullaniciFisleri(id).Where(x => x.Faturalandir == false).Count(),
+                AcikFisler = _fisService.KullaniciFisleri(id).Where(x => x.FisOzelliks.Any(xc => xc.Durum <= 2)).Count(),
+                ToplamFis = _fisService.KullaniciFisleri(id).Count()
+            };
+            return Json(JsonConvert.SerializeObject(fisSayilari));
+        }
+
+        public async Task<IActionResult> Detay(int id , int? page)
+        {
+            KullaniciDetayViewModel model = new KullaniciDetayViewModel()
+            {
+                Kullanici = _mapper.Map<KullaniciListDto>(await _userService.GetUserByIdAsync(id)),
+                Fisler = _fisService.KullaniciFisleri(id).PagedList(_mapper.Map<IEnumerable<Fis>, IEnumerable<FisDto>>, page ?? 1, 10)
+            };
+
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("~/View/Fis/FisListPartial/", model.Fisler);
+            }
+
+            return View(model);
         }
 
     }

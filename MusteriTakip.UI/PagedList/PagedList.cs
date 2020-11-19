@@ -8,6 +8,5 @@ namespace MusteriTakip.UI.PagedList
     public class PagedList<T> : PagedItemModel
     {
         public IEnumerable<T> Data { get; set; }
-
     }
 }
