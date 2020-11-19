@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using MusteriTakip.Business.ReturnTypes;
 using MusteriTakip.Business.Services;
 using MusteriTakip.DataAccess.Interfaces;
 using MusteriTakip.Entities.Concrete;
@@ -27,8 +28,9 @@ namespace MusteriTakip.Business.Concrete
         }
 
 
-        public async Task<IdentityResult> UserAdd(User user, string password)
+        public async Task<AppUserResult> UserAdd(User user, string password)
         {
+            AppUserResult info = new AppUserResult();
             user.UserName = user.Email;
             var result = await _userManager.CreateAsync(user, password);
             if (result.Succeeded)
@@ -38,10 +40,20 @@ namespace MusteriTakip.Business.Concrete
                 await _userManager.AddClaimAsync(user, new Claim(ClaimTypes.Email, user.Email));
                 await _userManager.AddToRoleAsync(user, "Member");
             }
-            return result;
+            else
+            {
+                foreach (var error in result.Errors)
+                {
+                    info.Errors.Add(error.Description);
+                    info.Success = false;
+                }
+            }
+
+            return info;
         }
-        public async Task<IdentityResult> UserAdd(User user,List<Role> roles, string password)
+        public async Task<AppUserResult> UserAdd(User user,List<Role> roles, string password)
         {
+            AppUserResult info = new AppUserResult();
             user.UserName = user.Email;
             var result = await _userManager.CreateAsync(user, password);
             if (result.Succeeded)
@@ -60,36 +72,100 @@ namespace MusteriTakip.Business.Concrete
                 {
                     await _userManager.AddToRoleAsync(user, "Member");
                 }
-              
             }
-            return result;
+            else
+            {
+                foreach (var error in result.Errors)
+                {
+                    info.Errors.Add(error.Description);
+                }
+            }
+            return info;
         }
-        public async Task<bool> UserDelete(User user)
+        public async Task<AppUserResult> UserDelete(User user)
         {
-            var deletedUser =await GetUserByIdAsync(user.Id);
+            AppUserResult info = new AppUserResult();
+            var deletedUser = await GetUserByIdAsync(user.Id);
+
+            if(deletedUser == null)
+            {
+                info.Success = false;
+                info.Errors.Add("Silinecek Kullanıcı Bulunamadı.");
+            }
+
+
             await _userManager.RemoveClaimsAsync(deletedUser, await _userManager.GetClaimsAsync(deletedUser));
             var result = await _userManager.DeleteAsync(deletedUser);
-            return result.Succeeded;
+
+            if (!result.Succeeded)
+            {
+                info.Success = false;
+                foreach (var error in result.Errors)
+                {
+                    info.Errors.Add(error.Description);
+                }
+            }
+
+            return info;
         }
-        public async Task<bool> UserAddRole(User user , string role)
+
+
+        public async Task<AppUserResult> UserAddRole(User user , string role)
         {
+            AppUserResult info = new AppUserResult();
             var result = await _userManager.AddToRoleAsync(user, role);
-            return result.Succeeded;
+            if (!result.Succeeded)
+            {
+                info.Success = false;
+                foreach (var error in result.Errors)
+                {
+                    info.Errors.Add(error.Description);
+                }
+            }
+            return info;
         }
-        public async Task<bool> UserAddRole(User user, List<string> role)
+        public async Task<AppUserResult> UserAddRole(User user, List<string> role)
         {
+            AppUserResult info = new AppUserResult();
             var result = await _userManager.AddToRolesAsync(user, role);
-            return result.Succeeded;
+            if (!result.Succeeded)
+            {
+                info.Success = false;
+                foreach (var error in result.Errors)
+                {
+                    info.Errors.Add(error.Description);
+                }
+            }
+            return info;
         }
-        public async Task<bool> UserDeleteRole(User user , string role)
+        public async Task<AppUserResult> UserDeleteRole(User user , string role)
         {
+            AppUserResult info = new AppUserResult();
             var result = await _userManager.RemoveFromRoleAsync(user, role);
-            return result.Succeeded;
+
+            if (!result.Succeeded)
+            {
+                foreach (var error in result.Errors)
+                {
+                    info.Errors.Add(error.Description);
+                }
+            }
+
+            return info;
         }
-        public async Task<bool> UserDeleteRole(User user, List<string> role)
+        public async Task<AppUserResult> UserDeleteRole(User user, List<string> role)
         {
+            AppUserResult info = new AppUserResult();
             var result = await _userManager.AddToRolesAsync(user, role);
-            return result.Succeeded;
+            if (!result.Succeeded)
+            {
+                foreach (var error in result.Errors)
+                {
+                    info.Errors.Add(error.Description);
+                }
+            }
+
+            return info;
         }
         public async Task<User> UserGetById(Claim nameIdentifier)
         {
@@ -119,9 +195,27 @@ namespace MusteriTakip.Business.Concrete
         {
             return _userManager.Users.FirstOrDefault(x => x.Email == eMail);
         }
-        public async Task<SignInResult> UserLogin(string userName , string password , bool persistent)
+        public async Task<AppUserLoginResult> UserLogin(string userName , string password , bool persistent)
         {
-           return await _signInManager.PasswordSignInAsync(userName , password, persistent , false);
+            AppUserLoginResult info = new AppUserLoginResult();
+            var userNameCheck = _userManager.Users.FirstOrDefault(x => x.UserName == userName);
+
+            if(userNameCheck == null)
+            {
+                info.Success = false;
+                info.Errors.Add("Kullanıcı Adı veya Şifre Hatalı");
+                return info;
+            }
+
+            var loginResult = await _signInManager.PasswordSignInAsync(userName, password, persistent, false);
+
+            if(!loginResult.Succeeded)
+            {
+                info.Success = false;
+                info.Errors.Add("Kullanıcı Adı veya Şifre Hatalı");
+            }
+
+            return info;
         }
     }
 }

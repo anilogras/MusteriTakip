@@ -55,9 +55,9 @@ namespace MusteriTakip.UI.Controllers
             {
                 var result = await _userService.UserAdd(_mapper.Map<User>(ajaxData), _mapper.Map<List<Role>>(ajaxData.Roller), ajaxData.Sifre);
 
-                if (!result.Succeeded)
+                if (!result.Success)
                 {
-                    return BadRequest(JsonConvert.SerializeObject(result.Errors.Select(x => x.Description)));
+                    return BadRequest(JsonConvert.SerializeObject(result.Errors));
                 }
 
                 return PartialView("KullaniciListPartial", _userService.GetUserWithRoles().PagedList(_mapper.Map<IEnumerable<User>, IEnumerable<KullaniciListDto>>));

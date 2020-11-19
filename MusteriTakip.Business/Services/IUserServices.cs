@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using MusteriTakip.Business.ReturnTypes;
 using MusteriTakip.Entities.Concrete;
 using System;
 using System.Collections.Generic;
@@ -12,13 +13,13 @@ namespace MusteriTakip.Business.Services
     public interface IUserServices
     {
 
-        Task<IdentityResult> UserAdd(User user, string password);
-        Task<IdentityResult> UserAdd(User user, List<Role> roles, string password);
-        Task<bool> UserDelete(User user);
-        Task<bool> UserAddRole(User user, string role);
-        Task<bool> UserAddRole(User user, List<string> role);
-        Task<bool> UserDeleteRole(User user, string role);
-        Task<bool> UserDeleteRole(User user, List<string> role);
+        Task<AppUserResult> UserAdd(User user, string password);
+        Task<AppUserResult> UserAdd(User user, List<Role> roles, string password);
+        Task<AppUserResult> UserDelete(User user);
+        Task<AppUserResult> UserAddRole(User user, string role);
+        Task<AppUserResult> UserAddRole(User user, List<string> role);
+        Task<AppUserResult> UserDeleteRole(User user, string role);
+        Task<AppUserResult> UserDeleteRole(User user, List<string> role);
 
         Task<User> UserGetById(Claim nameIdentifier);
         List<User> UserGetAll();
@@ -28,6 +29,6 @@ namespace MusteriTakip.Business.Services
         Task<User> GetUserByIdAsync(int id);
         IQueryable<Fis> GetUserFis(int id);
         Task UserChangeStatus(int id);
-        Task<SignInResult> UserLogin(string userName, string password, bool persistent);
+        Task<AppUserLoginResult> UserLogin(string userName, string password, bool persistent);
     }
 }
