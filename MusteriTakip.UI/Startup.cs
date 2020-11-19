@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MusteriTakip.Business.DependencyResolver;
 using MusteriTakip.Entities.Concrete;
+using Rotativa.AspNetCore;
 
 namespace MusteriTakip.UI
 {
@@ -22,7 +23,7 @@ namespace MusteriTakip.UI
         {
 
             services.AddCustomDependencies();
-          
+
             services.AddControllersWithViews().AddRazorRuntimeCompilation().AddNewtonsoftJson(act =>
             {
                 act.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
@@ -62,6 +63,8 @@ namespace MusteriTakip.UI
             {
                 endpoints.MapDefaultControllerRoute();
             });
+
+            RotativaConfiguration.Setup(env.WebRootPath, "Rotativa");
         }
     }
 }

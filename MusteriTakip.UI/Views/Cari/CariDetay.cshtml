@@ -176,10 +176,16 @@
 
 
         function kdvGetir() {
+
+            var token = $('input[name="__RequestVerificationToken"]').val();
+
         $.ajax({
             url: "/Kdv/Kdvler",
             dataType: "json",
             type: "post",
+            headers: {
+                "RequestVerificationToken": token
+            },
             success: function (data) {
                 var parseData = JSON.parse(data);
                 var kdvSelectBoxlari = $(document).find(".kdvList");

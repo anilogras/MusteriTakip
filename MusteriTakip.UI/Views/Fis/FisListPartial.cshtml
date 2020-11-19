@@ -8,7 +8,7 @@
             <th>Kayıt Tarihi</th>
             <th>İşin Durumu</th>
             <th>Fişi Üstlenen</th>
-            <th width="70px"></th>
+            <th width="100px"></th>
         </tr>
     </thead>
     <tbody>
@@ -28,9 +28,13 @@
                     @fis.Kullanici.AdSoyad
                 </td>
                 <td>
+                  
                     <span class="text-primary cursor-hand" data-toggle="modal" data-target="#fisDetay" data-post-url="/Fis/FisDuzenle/@fis.Id?cariId=@fis.Cari.Id" data-fis-id="@fis.Id">
                         <i class="icofont-eye"></i>
                     </span>
+                    <a asp-controller="Fis" asp-action="FisYazdir" asp-route-id="@fis.Id" target="_blank">
+                        <i class="icofont-print"></i>
+                    </a>
                     <span class="text-primary cursor-hand" data-toggle="modal" data-target="#fisSil" data-post-url="/Fis/FisSil/@fis.Id?cariId=@fis.Cari.Id" data-fis-no="@fis.Id.ToString().PadLeft(7,'0')">
                         <i class="icofont-ui-delete"></i>
                     </span>

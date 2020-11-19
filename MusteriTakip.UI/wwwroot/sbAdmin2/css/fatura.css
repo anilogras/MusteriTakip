@@ -1,0 +1,128 @@
+﻿body {
+    font-family: 'Roboto', sans-serif;
+}
+
+page {
+    background: white;
+    display: block;
+    margin: 0 auto;
+}
+
+    page[size="A4"] {
+        width: 21cm;
+        height: 29.7cm;
+    }
+
+        page[size="A4"][layout="landscape"] {
+            width: 29.7cm;
+            height: 21cm;
+        }
+
+    page[size="A3"] {
+        width: 29.7cm;
+        height: 42cm;
+    }
+
+        page[size="A3"][layout="landscape"] {
+            width: 42cm;
+            height: 29.7cm;
+        }
+
+    page[size="A5"] {
+        width: 14.8cm;
+        height: 21cm;
+    }
+
+        page[size="A5"][layout="landscape"] {
+            width: 21cm;
+            height: 14.8cm;
+        }
+
+@media print {
+    body, page {
+        margin: 0;
+        box-shadow: 0;
+    }
+}
+.sheet {
+    margin-top: 0;
+    box-shadow: none;
+    margin: 0
+}
+
+table, tr, td, th, tbody, thead, tfoot {
+    page-break-inside: avoid !important;
+}
+
+
+.form-head {
+    margin-bottom: 4px;
+}
+
+.text-primary {
+    color: #4e73df !important;
+    margin:4px 0;
+}
+
+.font-weight-bold {
+    font-weight: 700 !important;
+}
+
+.text-center {
+    text-align: center !important;
+}
+
+.flex {
+    width: 100%;
+    display: flex;
+    -ms-align-content: baseline;
+    -webkit-align-content: baseline;
+    align-content: baseline;
+    margin-bottom: 7px;
+}
+
+table tbody tr {
+    width: 100%;
+}
+
+.col-md-1 {
+    flex: 0 0 8.33333%;
+    max-width: 8.33333%;
+}
+
+.col-md-2 {
+    flex: 0 0 16.66667%;
+    max-width: 16.66667%;
+}
+
+.col-md-3 {
+    flex: 0 0 25%;
+    max-width: 25%;
+}
+
+.col-md-8 {
+    flex: 0 0 66.66667%;
+    max-width: 66.66667%;
+}
+
+.col-md-4 {
+    flex: 0 0 33.33333%;
+    max-width: 33.33333%;
+}
+
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+    table tr th, table tr td {
+        padding: 7px 4px;
+    }
+
+.mt-10{
+    margin-top:10px;
+}
+
+.p-7{
+    padding:7px;
+}

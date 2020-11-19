@@ -1,0 +1,87 @@
+﻿
+@{
+    Layout = null;
+}
+
+@model Fis
+
+<!DOCTYPE html>
+
+
+<html lang="tr">
+
+<head>
+    <meta charset="utf-8">
+    <title>A5 landscape</title>
+
+    <!-- Normalize or reset CSS with your favorite library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css">
+
+    <!-- Load paper.css for happy printing -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paper-css/0.4.1/paper.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Set page size here: A5, A4 or A3 -->
+    <!-- Set also "landscape" if you need -->
+    <style>
+        @@page {
+            size: A5 landscape
+        }
+    </style>
+    <link href="~/sbAdmin2/css/fatura.css" rel="stylesheet" />
+</head>
+
+<!-- Set "A5", "A4" or "A3" for class name -->
+<!-- Set also "landscape" if you need -->
+<body class="A5 landscape">
+
+    <!-- Each sheet element should have the class "sheet" -->
+    <!-- "padding-**mm" is optional: you can set 10, 15, 20 or 25 -->
+    <section class="sheet padding-10mm">
+
+        <p>
+            @{
+                if (!string.IsNullOrEmpty(Model.Cari.IsletmeAdi))
+                    @(Model.Cari.IsletmeAdi.ToUpper())
+            }
+            ( @{
+                if (!string.IsNullOrEmpty(Model.Cari.IsletmeYetkilisi))
+                    @(Model.Cari.IsletmeYetkilisi.ToUpper())
+            } )
+        </p>
+        <table style="width:100%">
+            <tr>
+                <th class="col-md-3 text-primary"> İşin Adı </th>
+                <th class="col-md-1 text-primary"> Adet       </th>
+                <th class="col-md-2 text-primary"> Açıklama   </th>
+                <th class="col-md-2 text-primary"> Fiyat      </th>
+                <th class="col-md-2 text-primary"> Ölçü       </th>
+                <th class="col-md-1 text-primary"> K.D.V      </th>
+            </tr>
+            @foreach (var fisOzellik in Model.FisOzelliks)
+            {
+                <tr>
+                    <td>@fisOzellik.Tanim            </td>
+                    <td>@fisOzellik.Adet             </td>
+                    <td>@fisOzellik.Aciklama         </td>
+                    <td>@fisOzellik.Fiyat.Value.ToString("C")</td>
+                    <td>@fisOzellik.Olcu             </td>
+                    <td>@fisOzellik.KDV %            </td>
+                </tr>
+            }
+        </table>
+        <table style="width:100%"class="mt-10">
+            <tr>
+                <td class="col-md-8 p-7">
+                    <p class="text-primary font-weight-bold">Fiş Açıklaması</p>
+                    @Model.FisNot
+                </td>
+                <td class="col-md-4  p-7"> 
+                        <p class="text-primary font-weight-bold">Ön Ödeme</p>
+                    @Model.OnOdeme.ToString("C")
+
+                </td>
+            </tr>
+        </table>
+    </section>
+</body>
+</html>
