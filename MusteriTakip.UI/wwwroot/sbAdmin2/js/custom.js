@@ -126,6 +126,7 @@ $(document).ready(function () {
     $(document).on("click", '.submit-btn', function () {
 
         var submitButton = $(this);
+        var targetDiv = $(submitButton).data("target-div");
         var formContent = $(submitButton).parents('.ajax-form');
         var postUrl = $(submitButton).parents(".modal").data("post-url");
        
@@ -144,8 +145,8 @@ $(document).ready(function () {
             },
             success: function (data) {
 
-                $(".ajax-table").empty();
-                $(".ajax-table").html(data);
+                $(targetDiv).empty();
+                $(targetDiv).html(data);
                 $(document).trigger("update");
                 $(submitButton).parents(".modal").modal("hide");
                 formContent.find(":input:not(radio)").val('');
@@ -206,6 +207,29 @@ $(document).ready(function () {
             type:"Get",
             success: function (data) {
                 kdvGetir();
+                modal.find(".modal-body").empty();
+                modal.find(".modal-body").html(data);
+            },
+            error: function (error) {
+                console.log(error.responseText);
+            }
+        })
+
+    })
+
+
+    $('#cariGuncelle').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget);
+        var cariId = button.data("cari-id");
+        var modal = $(this);
+
+        modal.find(".modal-body").html('<p class="text-center">Fiş Yükleniyor</p>')
+
+        $.ajax({
+            url: "/Cari/CariGuncellePartial/" + cariId,
+            type: "Get",
+            success: function (data) {
+
                 modal.find(".modal-body").empty();
                 modal.find(".modal-body").html(data);
             },

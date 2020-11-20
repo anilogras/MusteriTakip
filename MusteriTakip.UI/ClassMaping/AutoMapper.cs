@@ -34,11 +34,14 @@ namespace MusteriTakip.UI.ClassMaping
             CreateMap<User, KullaniciListDto>()
                  .ForMember(dest => dest.UserRoles, opt => opt.MapFrom(src => src.UserRoles));
 
+            CreateMap<CariSabitTelefonDto, CariTelefon>();
+            CreateMap<CariTelefon, CariSabitTelefonDto>();
+                
 
 
             CreateMap<Cari, CariListDto>()
                 .ForMember(dest => dest.CariAdresBilgileri, act => act.MapFrom(src => src.CariAdreslers))
-                .ForMember(dest => dest.CariCepTelefonlari, act => act.MapFrom(src => src.CariTelefons))
+                .ForMember(dest => dest.CariCepTelefonlari, act => act.MapFrom(src => src.CariCeps))
                 .ForMember(dest => dest.CariEMailAdresleri, act => act.MapFrom(src => src.CariEMails))
                 .ForMember(dest => dest.CariFaxTelefonlari, act => act.MapFrom(src => src.CariFaxes))
                 .ForMember(dest => dest.CariSabitTelefonlari, act => act.MapFrom(src => src.CariTelefons))
@@ -49,7 +52,7 @@ namespace MusteriTakip.UI.ClassMaping
 
             CreateMap<CariListDto, Cari>()
                 .ForMember(dest => dest.CariAdreslers, act => act.MapFrom(src => src.CariAdresBilgileri))
-                .ForMember(dest => dest.CariCeps, act => act.MapFrom(src => src.CariSabitTelefonlari))
+                .ForMember(dest => dest.CariCeps, act => act.MapFrom(src => src.CariCepTelefonlari))
                 .ForMember(dest => dest.CariEMails, act => act.MapFrom(src => src.CariEMailAdresleri))
                 .ForMember(dest => dest.CariFaxes, act => act.MapFrom(src => src.CariFaxTelefonlari))
                 .ForMember(dest => dest.CariTelefons, act => act.MapFrom(src => src.CariSabitTelefonlari))

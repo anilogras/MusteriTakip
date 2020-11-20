@@ -34,7 +34,7 @@ namespace MusteriTakip.UI.Controllers
             _userService = userService;
         }
 
-        public async Task<IActionResult> CariFisEkle(int cariId, FisDto ajaxData)
+        public async Task<IActionResult> CariFisEkle(int Id, FisDto ajaxData)
         {
             if (!ModelState.IsValid)
             {
@@ -45,8 +45,8 @@ namespace MusteriTakip.UI.Controllers
             if (Request.IsAjaxRequest())
             {
                 var user = await _userService.GetUserByIdAsync(Convert.ToInt32(User.FindFirst(ClaimTypes.NameIdentifier).Value));
-                await _fisService.CariFisEkleAsync(_mapper.Map<Fis>(ajaxData),user, cariId);
-                return PartialView("~/Views/Fis/FisListPartial.cshtml", _fisService.CariFisleri(cariId).PagedList(_mapper.Map<IEnumerable<Fis>, IEnumerable<FisDto>>, 1, 10));
+                await _fisService.CariFisEkleAsync(_mapper.Map<Fis>(ajaxData),user, Id);
+                return PartialView("~/Views/Fis/FisListPartial.cshtml", _fisService.CariFisleri(Id).PagedList(_mapper.Map<IEnumerable<Fis>, IEnumerable<FisDto>>, 1, 10));
             }
 
             

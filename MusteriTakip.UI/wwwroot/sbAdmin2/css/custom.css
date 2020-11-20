@@ -406,3 +406,7 @@ a:hover {
     .circle.aktif {
         background-color: #1cc88a !important;
     }
+
+.h3 {
+    font-size: 26px;
+}

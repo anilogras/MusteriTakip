@@ -22,6 +22,7 @@ namespace MusteriTakip.DataAccess.Interfaces
         Task<TEntity> GetByIdAsync(int id);
         void Add(TEntity entity);
         void Delete(TEntity entity);
+        void Update(TEntity entity);
         Task<int> SaveChangesAsync();
     }
 }

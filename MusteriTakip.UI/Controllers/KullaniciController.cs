@@ -126,5 +126,6 @@ namespace MusteriTakip.UI.Controllers
             return View(model);
         }
 
+
     }
 }

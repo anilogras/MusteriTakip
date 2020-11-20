@@ -30,6 +30,11 @@ namespace MusteriTakip.Business.Concrete
             _genericDal.Delete(entity);
         }
 
+        public void Update(TEntity entity)
+        {
+            _genericDal.Update(entity);
+        }
+
         public int EntityCount()
         {
             return _genericDal.EntityCount();

@@ -40,6 +40,12 @@ namespace MusteriTakip.DataAccess.Concrete.EntityFrameworkCore.Repositories
 
         }
 
+        public void Update(TEntity entity)
+        {
+            var updated = _context.Entry(entity);
+            updated.State = EntityState.Modified;
+        }
+
         public async Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> expression)
         {
             return await _context.Set<TEntity>().FirstOrDefaultAsync(expression);

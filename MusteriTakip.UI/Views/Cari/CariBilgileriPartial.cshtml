@@ -1,0 +1,147 @@
+﻿
+
+
+@model CariListDto
+
+<div class="card shadow mb-4">
+    <a href="#collapseCardExample" class="d-block card-header py-3 collapsed" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseCardExample">
+        <h6 class="m-0 font-weight-bold text-primary">
+            @{
+                if (!string.IsNullOrEmpty(Model.IsletmeAdi))
+                    @(Model.IsletmeAdi.ToUpper())
+            }
+            ( @{
+                if (!string.IsNullOrEmpty(Model.IsletmeYetkilisi))
+                    @(Model.IsletmeYetkilisi.ToUpper())
+            } )
+        </h6>
+    </a>
+    <div class="collapse" id="collapseCardExample">
+        <div class="card-body">
+            <div class="row cari-bilgileri">
+                <div class="col-md-8 col-sm-12">
+                    @if (Model.CariSabitTelefonlari.Count() != 0)
+                    {
+                        <div class="flex-start div-list">
+                            <div>
+                                <b>Sabit Telefon Bilgileri :</b>
+                            </div>
+                            <div>
+                                @foreach (var sabitTelefonlar in Model.CariSabitTelefonlari)
+                                {
+
+                                    @(sabitTelefonlar.Telefon.TelNoDuzenle() ) <span>-</span>
+
+                                }
+                            </div>
+                        </div>
+                    }
+
+                    @if (Model.CariCepTelefonlari.Count() != 0)
+                    {
+                        <div class="flex-start div-list">
+                            <div>
+                                <b>Cep Telefon Bilgileri :</b>
+                            </div>
+                            <div>
+                                @foreach (var cepTelefon in Model.CariCepTelefonlari)
+                                {
+                                    @(cepTelefon.Cep.TelNoDuzenle()) <span>-</span>
+                                }
+                            </div>
+                        </div>
+                    }
+
+                    @if (Model.CariFaxTelefonlari.Count() != 0)
+                    {
+                        <div class="flex-start div-list">
+                            <div>
+                                <b>Fax Bilgileri :</b>
+                            </div>
+                            <div>
+                                @foreach (var faxBilgileri in Model.CariFaxTelefonlari)
+                                {
+
+                                    @(faxBilgileri.Fax.TelNoDuzenle()) <span>-</span>
+
+                                }
+                            </div>
+                        </div>
+                    }
+
+                    @if (Model.CariEMailAdresleri.Count() != 0)
+                    {
+                        <div class="flex-start div-list">
+                            <div>
+                                <b>E-Mail Bilgileri :</b>
+                            </div>
+                            <div>
+                                @foreach (var eMail in Model.CariEMailAdresleri)
+                                {
+                                    @(eMail.EMail) <span>-</span>
+                                }
+                            </div>
+                        </div>
+                    }
+
+                    @if (Model.CariWebSiteBilgileri.Count() != 0)
+                    {
+                        <div class="flex-start div-list">
+                            <div>
+                                <b>Web Site Bilgileri :</b>
+                            </div>
+                            <div>
+                                @foreach (var webSite in Model.CariWebSiteBilgileri)
+                                {
+
+                                    <a href="@(webSite.WebSite)" target="_blank">@(webSite.WebSite)</a> <span>-</span>
+                                }
+                            </div>
+                        </div>
+                    }
+                </div>
+
+                <div class="col-md-4 col-sm-6">
+                    @if (Model.CariAdresBilgileri.Count() != 0)
+                    {
+                        <div class="flex-start div-list">
+                            <div>
+                                <b>Adres Bilgileri :</b>
+                            </div>
+                            <div>
+                                @foreach (var adresBilgileri in Model.CariAdresBilgileri)
+                                {
+                                    <div class="list-item">
+                                        @(adresBilgileri.Adres) @(adresBilgileri.Il.Sehir) <span>/</span> @(adresBilgileri.Ilce.IlceAdi) <span>-</span>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    }
+                </div>
+
+                <div class="col-md-4 col-sm-6">
+                    @if (Model.CariVDBilgileri != null)
+                    {
+                        <div class="flex-start div-list">
+                            <div>
+                                <b>V.D. Bilgileri :</b>
+                            </div>
+                            <div>
+                                <div class="list-item">
+                                    Ünvan : @Model.CariVDBilgileri.Unvan
+                                </div>
+                                <div class="list-item">
+                                    Vd. Dairesi : @Model.CariVDBilgileri.VdDairesi
+                                </div>
+                                <div class="list-item">
+                                    Vd. No : @Model.CariVDBilgileri.VDNo
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

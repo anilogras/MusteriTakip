@@ -45,7 +45,6 @@ namespace MusteriTakip.UI.Controllers
 
             return View(model);
         }
-
         public async Task<IActionResult> CariEkle(CariListDto ajaxData)
         {
             if (!ModelState.IsValid)
@@ -63,7 +62,6 @@ namespace MusteriTakip.UI.Controllers
 
             return RedirectToAction("Index", "Home");
         }
-
         public IActionResult FisSayisiGetir(int id)
         {
             FisSayilari fisSayilari = new FisSayilari
@@ -74,7 +72,6 @@ namespace MusteriTakip.UI.Controllers
             };
             return Json(JsonConvert.SerializeObject(fisSayilari));
         }
-
         public async Task<IActionResult> CariDetay(int id, int? page)
         {
             CariDetayView model = new CariDetayView
@@ -85,12 +82,11 @@ namespace MusteriTakip.UI.Controllers
 
             if (Request.IsAjaxRequest())
             {
-                return PartialView("~/View/Fis/FisListPartial/", model.CariFisleri);
+                return PartialView("~/Views/Fis/FisListPartial.cshtml/", model.CariFisleri);
             }
 
             return View(model);
         }
-
         public async Task<IActionResult> CariSil(int id)
         {
 
@@ -101,6 +97,36 @@ namespace MusteriTakip.UI.Controllers
                 return PartialView("CariListPartial", _cariService.GetQueryable().PagedList(_mapper.Map<IEnumerable<Cari>, IEnumerable<CariListDto>>, 1, 10));
             }
 
+            return RedirectToAction("Index", "Home");
+        }
+
+        public async Task<IActionResult> CariGuncelle(CariListDto ajaxData)
+        {
+            if (!ModelState.IsValid)
+            {
+                var errors = ModelState.Values.SelectMany(x => x.Errors).Select(x => x.ErrorMessage).ToList().Distinct();
+                return BadRequest(JsonConvert.SerializeObject(errors));
+            }
+
+            if (Request.IsAjaxRequest())
+            {
+                var result = await _cariService.CariGuncelle(_mapper.Map<Cari>(ajaxData));
+                if(result.Errors.Count != 0)
+                {
+                    return BadRequest(JsonConvert.SerializeObject(result.Errors));
+                }
+                return PartialView("CariBilgileriPartial", _mapper.Map<CariListDto>(await _cariService.GetByIdAsync(ajaxData.Id)));
+            }
+
+            return RedirectToAction("Index", "Home");
+        }
+
+        public async Task<IActionResult> CariGuncellePartial(int id)
+        {
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("CariGuncelleContentPartial", _mapper.Map<CariListDto>(await _cariService.GetByIdAsync(id)));
+            }
             return RedirectToAction("Index", "Home");
         }
     }

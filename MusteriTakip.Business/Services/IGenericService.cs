@@ -13,12 +13,13 @@ namespace MusteriTakip.Business.Services
 
         Task<List<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> expression = null);
         IQueryable<TEntity> GetQueryable(Expression<Func<TEntity, bool>> expression = null);
-
         Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> expression);
         Task<TEntity> GetByIdAsync(int id);
         int EntityCount();
         void Add(TEntity entity);
         void Delete(TEntity entity);
+        void Update(TEntity entity);
+
         Task<int> SaveChangeAsync();
     }
 }
